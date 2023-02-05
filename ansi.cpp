@@ -1,11 +1,12 @@
 /*
-<https://en.wikipedia.org/wiki/ANSI_escape_code>
-*/
+ * 2022 Cyprien Lacassagne
+ * <https://en.wikipedia.org/wiki/ANSI_escape_code>
+ */
 #include <iostream>
 #include <string>
 #include <vector>
 
-// Written by Georges and Claudine Ottavj
+// Pangramm written by Georges and Claudine Ottavj
 const std::string pangramm("Le vif zephir jubile sur les kumquats du clown gracieux.");
 typedef std::vector<std::string> SgrDoc;
 void set_sgr_doc(SgrDoc& vec);
@@ -23,6 +24,7 @@ int main() {
 	SGR(sgr);
 	Colors_4_bits();
 	Colors_8_bits();
+    std::cout << "\n";
 	return 0;
 }
 
