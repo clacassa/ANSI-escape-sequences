@@ -5,28 +5,31 @@
 #include <string>
 #include <vector>
 
-const std::string pangramm("Le vif zephir jubile sur les kumquats du clown gracieux.");  // Written by Georges and Claudine Ottavj
+// Written by Georges and Claudine Ottavj
+const std::string pangramm("Le vif zephir jubile sur les kumquats du clown gracieux.");
 typedef std::vector<std::string> SgrDoc;
 void set_sgr_doc(SgrDoc& vec);
 
 // Select Graphic Rendition (SGR)
 void SGR(SgrDoc vec);
 // 4-bit Standard Colors
-void Colors_4_bytes();
+void Colors_4_bits();
 // 8-bit Standard Colros
-void Colors_8_bytes();
+void Colors_8_bits();
 
 int main() {
 	SgrDoc sgr(76, "");
 	set_sgr_doc(sgr);
 	SGR(sgr);
-	Colors_4_bytes();
-	Colors_8_bytes();
+	Colors_4_bits();
+	Colors_8_bits();
 	return 0;
 }
 
 void SGR(SgrDoc vec) {
-	std::cout << "\nSelect Graphic Rendition (SGR)\n";
+    std::cout << "\n";
+	std::cout << "Select Graphic Rendition (SGR)\tCSI n m\n";
+    std::cout << "------------------------------\n";
 	for (unsigned i(1); i < 10; ++i) {
 		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "  |  " << i << "   |  " + vec[i] + "\n";
 	}
@@ -42,27 +45,26 @@ void SGR(SgrDoc vec) {
 	}
 }
 
-void Colors_4_bytes() {
-	std::cout << "\n4-bit -- 16 colors\n";
-	std::cout << "Foreground:\n";
+void Colors_4_bits() {
+	std::cout << "\n4-bit (16 colors)\n";
 	for (unsigned i(30); i < 38; ++i) {
-		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "\n";
+		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "  |  " << i << "\n";
 	}
 	for (unsigned i(90); i < 98; ++i) {
-		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "\n";
+		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "  |  " << i << "\n";
 	}
-	std::cout << "Background:\n";
 	for (unsigned i(40); i < 48; ++i) {
-		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "\n";
+		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "  |  " << i << "\n";
 	}
 	for (unsigned i(100); i < 108; ++i) {
-		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "\n";
+		std::cout << "\x1b[" << i << "m" + pangramm + "\x1b[0m" "  |  " << i << "\n";
 	}
 }
 
-void Colors_8_bytes() {
-	std::cout << "\n8-bit -- 256 colors\n";
-	std::cout << "Foreground:\n";
+void Colors_8_bits() {
+    std::cout << "\n";
+	std::cout << "8-bit (256 colors)\tforeground CSI 38;5;n m\tbackground CSI 48;5;n m\n";
+    std::cout << "------------------\n";
 	std::string code;
 	unsigned intcode;
 	for (unsigned i(0); i < 16; ++i) {
@@ -81,7 +83,6 @@ void Colors_8_bytes() {
 		}
 		std::cout << "\n";
 	}
-	std::cout << "Background:\n";
 	for (unsigned i(0); i < 16; ++i) {
 		for (unsigned j(0); j < 16; ++j) {
 			intcode = i * 16 + j;
